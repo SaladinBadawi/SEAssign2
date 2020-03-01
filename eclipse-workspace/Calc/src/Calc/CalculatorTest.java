@@ -1,8 +1,6 @@
 package Calc;
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
-
+import static org.junit.Assert.*;
 public class CalculatorTest {
 
 	@Test
@@ -20,6 +18,7 @@ public class CalculatorTest {
 		Calculator ca = new Calculator();
 		int result = ca.add(first,second);
 		assertTrue(result<0);
+		//assertEquals(result<0,ca.add(first,second) );
 	}
 	@Test
 	public void testAddOnePositiveisGreaterOneNegative() {
