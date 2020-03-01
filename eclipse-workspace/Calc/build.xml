@@ -33,7 +33,7 @@
         <path refid="Calc.classpath"/>
         <path refid="JUnit 5.libraryclasspath"/>
     </path>
-    <path id="run.CalculatorTest2.classpath">
+    <path id="run.CalculatorTest.testAdd_BothNumbersAreNegative_ShouldReturnNegativeNumber.classpath">
         <path refid="Calc.classpath"/>
         <path refid="JUnit 5.libraryclasspath"/>
     </path>
@@ -41,7 +41,7 @@
         <path refid="Calc.classpath"/>
         <path refid="JUnit 5.libraryclasspath"/>
     </path>
-    <path id="run.CalculatorTest.testAdd_BothNumbersAreNegative_ShouldReturnNegativeNumber.classpath">
+    <path id="run.CalculatorTest2.classpath">
         <path refid="Calc.classpath"/>
         <path refid="JUnit 5.libraryclasspath"/>
     </path>
@@ -93,13 +93,13 @@
             <classpath refid="run.CalculatorTest.classpath"/>
         </junit>
     </target>
-    <target name="CalculatorTest2">
+    <target name="CalculatorTest.testAdd_BothNumbersAreNegative_ShouldReturnNegativeNumber">
         <mkdir dir="${junit.output.dir}"/>
         <junit fork="yes" printsummary="withOutAndErr">
             <formatter type="xml"/>
-            <test name="Calc.CalculatorTest2" todir="${junit.output.dir}"/>
+            <test name="Calc.CalculatorTest" todir="${junit.output.dir}"/>
             <jvmarg line="-ea"/>
-            <classpath refid="run.CalculatorTest2.classpath"/>
+            <classpath refid="run.CalculatorTest.testAdd_BothNumbersAreNegative_ShouldReturnNegativeNumber.classpath"/>
         </junit>
     </target>
     <target name="CalculatorTest1">
@@ -111,13 +111,13 @@
             <classpath refid="run.CalculatorTest1.classpath"/>
         </junit>
     </target>
-    <target name="CalculatorTest.testAdd_BothNumbersAreNegative_ShouldReturnNegativeNumber">
+    <target name="CalculatorTest2">
         <mkdir dir="${junit.output.dir}"/>
         <junit fork="yes" printsummary="withOutAndErr">
             <formatter type="xml"/>
-            <test name="Calc.CalculatorTest" todir="${junit.output.dir}"/>
+            <test name="Calc.CalculatorTest2" todir="${junit.output.dir}"/>
             <jvmarg line="-ea"/>
-            <classpath refid="run.CalculatorTest.testAdd_BothNumbersAreNegative_ShouldReturnNegativeNumber.classpath"/>
+            <classpath refid="run.CalculatorTest2.classpath"/>
         </junit>
     </target>
     <target name="CalculatorTest2.testAddTwoPositive">
