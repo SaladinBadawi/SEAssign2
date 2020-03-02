@@ -1,140 +1,61 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- WARNING: Eclipse auto-generated file.
-              Any modifications will be overwritten.
-              To include a user specific buildfile here, simply create one in the same
-              directory with the processing instruction <?eclipse.ant.import?>
-              as the first entry and export the buildfile again. --><project basedir="." default="build" name="Calc">
-    <property environment="env"/>
-    <property name="junit.output.dir" value="junit"/>
-    <property name="debuglevel" value="source,lines,vars"/>
-    <property name="target" value="12"/>
-    <property name="source" value="12"/>
-    <path id="JUnit 5.libraryclasspath">
-        <pathelement location="../../.p2/pool/plugins/org.junit.jupiter.api_5.5.1.v20190826-0900.jar"/>
-        <pathelement location="../../.p2/pool/plugins/org.junit.jupiter.engine_5.5.1.v20190826-0900.jar"/>
-        <pathelement location="../../.p2/pool/plugins/org.junit.jupiter.migrationsupport_5.5.1.v20190826-0900.jar"/>
-        <pathelement location="../../.p2/pool/plugins/org.junit.jupiter.params_5.5.1.v20190826-0900.jar"/>
-        <pathelement location="../../.p2/pool/plugins/org.junit.platform.commons_1.5.1.v20190826-0900.jar"/>
-        <pathelement location="../../.p2/pool/plugins/org.junit.platform.engine_1.5.1.v20190826-0900.jar"/>
-        <pathelement location="../../.p2/pool/plugins/org.junit.platform.launcher_1.5.1.v20190826-0900.jar"/>
-        <pathelement location="../../.p2/pool/plugins/org.junit.platform.runner_1.5.1.v20190826-0900.jar"/>
-        <pathelement location="../../.p2/pool/plugins/org.junit.platform.suite.api_1.5.1.v20190826-0900.jar"/>
-        <pathelement location="../../.p2/pool/plugins/org.junit.vintage.engine_5.5.1.v20190826-0900.jar"/>
-        <pathelement location="../../.p2/pool/plugins/org.opentest4j_1.2.0.v20190826-0900.jar"/>
-        <pathelement location="../../.p2/pool/plugins/org.apiguardian_1.1.0.v20190826-0900.jar"/>
-        <pathelement location="../../.p2/pool/plugins/org.junit_4.12.0.v201504281640/junit.jar"/>
-        <pathelement location="../../.p2/pool/plugins/org.hamcrest.core_1.3.0.v20180420-1519.jar"/>
+
+<project default="compile">
+
+
+    <property name="src.java.dir" location="./src/cal"/>
+    <property name="src.test.dir" location="./src/cal"/>
+    <property name="result.dir" location="./target"/>
+    <property name="result.javaclasses.dir" location="${result.dir}/classes"/>
+    <property name="result.testclasses.dir" location="${result.dir}/testclasses"/>
+
+
+
+
+
+    <path id="NecessaryLibraries">
+        <pathelement location="C:/Users/USER/.p2/pool/plugins/org.junit.jupiter.api_5.5.1.v20190826-0900.jar"/>
+        <!--matcher-->
+        <pathelement location="C:/Users/USER/.p2/pool/plugins/org.hamcrest.core_1.3.0.v20180420-1519.jar"/>
+        <!--<pathelement location="./UsedLibraries/jacocoant.jar"/>-->
     </path>
-    <path id="Calc.classpath">
-        <pathelement location="bin"/>
-        <path refid="JUnit 5.libraryclasspath"/>
-    </path>
-    <path id="run.CalculatorTest.classpath">
-        <path refid="Calc.classpath"/>
-        <path refid="JUnit 5.libraryclasspath"/>
-    </path>
-    <path id="run.CalculatorTest.testAdd_BothNumbersAreNegative_ShouldReturnNegativeNumber.classpath">
-        <path refid="Calc.classpath"/>
-        <path refid="JUnit 5.libraryclasspath"/>
-    </path>
-    <path id="run.CalculatorTest1.classpath">
-        <path refid="Calc.classpath"/>
-        <path refid="JUnit 5.libraryclasspath"/>
-    </path>
-    <path id="run.CalculatorTest2.classpath">
-        <path refid="Calc.classpath"/>
-        <path refid="JUnit 5.libraryclasspath"/>
-    </path>
-    <path id="run.CalculatorTest2.testAddTwoPositive.classpath">
-        <path refid="Calc.classpath"/>
-        <path refid="JUnit 5.libraryclasspath"/>
-    </path>
-    <target name="init">
-        <mkdir dir="bin"/>
-        <copy includeemptydirs="false" todir="bin">
-            <fileset dir="src">
-                <exclude name="**/*.java"/>
-            </fileset>
-        </copy>
-    </target>
-    <target name="clean">
-        <delete dir="bin"/>
-    </target>
-    <target depends="clean" name="cleanall"/>
-    <target depends="build-subprojects,build-project" name="build"/>
-    <target name="build-subprojects"/>
-    <target depends="init" name="build-project">
-        <echo message="${ant.project.name}: ${ant.file}"/>
-        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
-            <src path="src"/>
-            <classpath refid="Calc.classpath"/>
+
+
+    <target name="compile">
+        <mkdir dir="${result.javaclasses.dir}"/>
+        <javac srcdir="${src.java.dir}" destdir="${result.javaclasses.dir}" debug="true"  includeantruntime="false">
         </javac>
     </target>
-    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
-    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
-        <copy todir="${ant.library.dir}">
-            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
-        </copy>
-        <unzip dest="${ant.library.dir}">
-            <patternset includes="jdtCompilerAdapter.jar"/>
-            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
-        </unzip>
+
+
+    <target name="compile-testcases" depends="compile">
+        <mkdir dir="${result.testclasses.dir}"/>
+        <javac srcdir="${src.test.dir}"  destdir="${result.testclasses.dir}" debug="true" includeantruntime="false">
+            <classpath>
+
+                <path refid="NecessaryLibraries"/>
+                <pathelement location="${result.javaclasses.dir}"/>
+            </classpath>
+        </javac>
     </target>
-    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
-        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
-        <antcall target="build"/>
-    </target>
-    <target name="CalculatorTest">
-        <mkdir dir="${junit.output.dir}"/>
-        <junit fork="yes" printsummary="withOutAndErr">
-            <formatter type="xml"/>
-            <test name="Calc.CalculatorTest" todir="${junit.output.dir}"/>
-            <jvmarg line="-ea"/>
-            <classpath refid="run.CalculatorTest.classpath"/>
+
+    <target name="test" depends="compile-testcases">
+        <!--fork : each test will run in its own JVM (to seperate test cases)-->
+        <junit printsummary="true" haltonfailure="true" fork="true">
+            <classpath>
+                <path refid="NecessaryLibraries"></path>
+                <pathelement location="${result.javaclasses.dir}"/>
+                <pathelement location="${result.testclasses.dir}"/>
+            </classpath>
+            <formatter type="brief" usefile="false"/>
+            <batchtest >
+                <fileset dir="${result.testclasses.dir}" >
+                     <include name="**/*Test.class"/>
+                </fileset>
+            </batchtest>
+
         </junit>
     </target>
-    <target name="CalculatorTest.testAdd_BothNumbersAreNegative_ShouldReturnNegativeNumber">
-        <mkdir dir="${junit.output.dir}"/>
-        <junit fork="yes" printsummary="withOutAndErr">
-            <formatter type="xml"/>
-            <test name="Calc.CalculatorTest" todir="${junit.output.dir}"/>
-            <jvmarg line="-ea"/>
-            <classpath refid="run.CalculatorTest.testAdd_BothNumbersAreNegative_ShouldReturnNegativeNumber.classpath"/>
-        </junit>
-    </target>
-    <target name="CalculatorTest1">
-        <mkdir dir="${junit.output.dir}"/>
-        <junit fork="yes" printsummary="withOutAndErr">
-            <formatter type="xml"/>
-            <test name="Calc.CalculatorTest1" todir="${junit.output.dir}"/>
-            <jvmarg line="-ea"/>
-            <classpath refid="run.CalculatorTest1.classpath"/>
-        </junit>
-    </target>
-    <target name="CalculatorTest2">
-        <mkdir dir="${junit.output.dir}"/>
-        <junit fork="yes" printsummary="withOutAndErr">
-            <formatter type="xml"/>
-            <test name="Calc.CalculatorTest2" todir="${junit.output.dir}"/>
-            <jvmarg line="-ea"/>
-            <classpath refid="run.CalculatorTest2.classpath"/>
-        </junit>
-    </target>
-    <target name="CalculatorTest2.testAddTwoPositive">
-        <mkdir dir="${junit.output.dir}"/>
-        <junit fork="yes" printsummary="withOutAndErr">
-            <formatter type="xml"/>
-            <test name="Calc.CalculatorTest2" todir="${junit.output.dir}"/>
-            <jvmarg line="-ea"/>
-            <classpath refid="run.CalculatorTest2.testAddTwoPositive.classpath"/>
-        </junit>
-    </target>
-    <target name="junitreport">
-        <junitreport todir="${junit.output.dir}">
-            <fileset dir="${junit.output.dir}">
-                <include name="TEST-*.xml"/>
-            </fileset>
-            <report format="frames" todir="${junit.output.dir}"/>
-        </junitreport>
-    </target>
+
+
+
 </project>
